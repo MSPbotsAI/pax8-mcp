@@ -17,11 +17,11 @@ ENV UV_LINK_MODE=copy
 
 # Install dependencies first (layer-cached when only src changes)
 COPY pyproject.toml uv.lock* ./
-RUN uv sync --frozen --no-dev --no-install-project
+RUN uv sync --no-dev --no-install-project
 
 # Install the project itself
 COPY . .
-RUN uv sync --frozen --no-dev
+RUN uv sync --no-dev
 
 # Production stage — slim image, no uv, no build tools
 FROM python:3.12-slim AS production
